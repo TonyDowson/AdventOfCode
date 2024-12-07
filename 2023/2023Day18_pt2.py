@@ -25,7 +25,7 @@ def calculateArea(coords):
     for row in range(minrow, maxrow):
         for col in range(mincol, maxcol):
             point = Point(row, col)
-            if (polygon.contains(point)):
+            if (polygon.within(point)):
                 area+= 1    
     print("Polygon area "+str(polygon.area))
     print("area calced="+str(area))         
@@ -53,6 +53,12 @@ def createMap(game_data):
         coords.append( (row, col ) )          
 
     return coords, perimeter
+
+def traverseMap(map):
+    step = 0
+    polygon = []
+    return step, polygon
+
 
 game_data = [
     "R 6 (#70c710)\n",
