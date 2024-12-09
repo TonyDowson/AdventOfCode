@@ -8,15 +8,18 @@ def traverse_map(map, pos):
          #print("Pos=" + str(pos) + " Dir=" + str(dir))
          newpos = (pos[0] + dir[0], pos[1] + dir[1])
          
-         if map[newpos] == 'O' and loop < 2:
-            loop += 1       
-         elif (loop == 3 and map[newpos] == 'O'):            
-            print("Loop")
-            visited = set()
-            break
+
+         #if map[newpos] == 'O' and loop <= 2:
+         #   print("Loop")
+         #   loop += 1       
+         #elif (map[newpos] == 'O' and loop > 2):            
+         #   print("Loop")
+         #   visited = set()
+         #   break
 
          if map[newpos] == '#' or map[newpos] == 'O':
             # change direction
+            #print("Will Hit="+ str(map[newpos]) + " Pos=" + str(pos) + " Dir=" + str(dir) + " Visited=" + str(len(visited)))
             if dir[0] == 0 and dir[1] == -1:
                dir = (1,0)
             elif dir[0] == 1 and dir[1] == 0:
@@ -26,11 +29,21 @@ def traverse_map(map, pos):
             else: 
                dir = (0,-1)
          else:
+            previouslen = len(visited)
             visited.add(newpos)
             pos = newpos
+            if (len(visited) == previouslen):
+               loop += 1
+               # This is brute brute force !! Very inefficient but does work
+               if loop > 200:
+                  #print("Loop")
+                  visited = set()
+                  break
+            else:
+               loop = 0
 
       except KeyError:
-         print("Key Error " +  str(newpos))
+         #print("Key Error " +  str(newpos))
          break
 
    return len(visited)
@@ -48,8 +61,8 @@ gd = [
    "......#..."
 ]
 
-#f = open("C:\\Users\\U8001904\\OneDrive - London Stock Exchange Group\\Learning\\Python Learning\\AdventOfCode\\2024\\2024Day6.txt", "r")
-#gd = f.readlines()
+f = open("2024\\2024Day6.txt", "r")
+gd = f.readlines()
 
 game_data = [i.strip('\n') for i in gd]
 
@@ -70,11 +83,11 @@ print("Total for Part 1 " + str(traverse_map(map, pos)))
 
 loop = 0
 for i in map.keys():
-   print(i)
+   #print(i)
 
    v = map[i]
    if v == '#' or v == '^':
-      print("Skip")
+      #print("Skip")
       continue
    map[i] = 'O'
 
