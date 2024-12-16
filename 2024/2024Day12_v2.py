@@ -1,3 +1,13 @@
+def remove2(p,l):
+	if p in l:
+		l.remove(p)
+		
+def update(d,v):
+	if d.get(v):
+		d[v] += 1
+	else:
+		d[v] = 1
+		
 def traverse(maxx, maxy, map, pos, paths):
 	paths.append(pos)
 	v = map[pos]
@@ -31,7 +41,7 @@ gd = [
 	"BBCC",
 	"EEEC"
 ]
-'''
+
 gd = [
 	"OOOOO",
 	"OXOXO",
@@ -52,7 +62,23 @@ gd = [
 "MIIISIJEEE",
 "MMMISSJEEE"
 ]
-'''
+
+gd = [
+	"EEEEE",
+	"EXXXX",
+	"EEEEE",
+	"EXXXX",
+	"EEEEE"
+]
+
+gd = [
+	"AAAAAA",
+	"AAABBA",
+	"AAABBA",
+	"ABBAAA",
+	"ABBAAA",
+	"AAAAAA"
+]
 
 #f = open("Day12.txt", "r")
 #gd = f.readlines()
@@ -104,13 +130,25 @@ for l in all:
 
 print("Part 1 Total " + str(total))
 print()
+print("Part 2")
+# Part 2
 total = 0
 for l in all:
 	print(l)
-	sides = 4
-	if len(l) <= 2:
-		sides = 4
-	print("area="+str(len(l)) + " sides="+str(sides))
-	total += len(l) * sides
+	points = {}
+	for c in l:
+		update(points,c)
+		update(points,(c[0]+1, c[1]))	
+		update(points,(c[0]+1, c[1]+1))			
+		update(points, (c[0], c[1]+1))	
+	
+	side = 0	
+	for key,value in points.items():
+		if value % 2 == 1:
+			side += 1
+	print(points)
+	print("area="+str(len(l)) + " sides="+str(side))
+	total += len(l) * side
 
 print("Part 2 Total " + str(total))
+#815338
