@@ -7,15 +7,6 @@ def traverse_map(map, pos):
       try:
          #print("Pos=" + str(pos) + " Dir=" + str(dir))
          newpos = (pos[0] + dir[0], pos[1] + dir[1])
-         
-
-         #if map[newpos] == 'O' and loop <= 2:
-         #   print("Loop")
-         #   loop += 1       
-         #elif (map[newpos] == 'O' and loop > 2):            
-         #   print("Loop")
-         #   visited = set()
-         #   break
 
          if map[newpos] == '#' or map[newpos] == 'O':
             # change direction
@@ -77,8 +68,6 @@ for g in game_data:
          map[(i,y)] = g[i]
          pos = (i,y)
    y += 1   
-
-print(pos)
 print("Total for Part 1 " + str(traverse_map(map, pos)))
 
 loop = 0

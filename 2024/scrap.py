@@ -1,5 +1,6 @@
 # Function which returns subset or r length from n
 from itertools import combinations
+import re
 
 def rSubset(arr, r):
 
@@ -45,3 +46,24 @@ l = ['5','4','3']
 ln = [int(x) for x in l]
 print(ln)
 print(calc(ln))
+
+'''
+s = "| 'TOMATOES_PICKED'       |   914 |   1397 |"
+pattern = re.compile(r"""\|\s*                 # opening bar and whitespace
+                             '(?P<name>.*?)'       # quoted name
+                             \s*\|\s*(?P<n1>.*?)   # whitespace, next bar, n1
+                             \s*\|\s*(?P<n2>.*?)   # whitespace, next bar, n2
+                             \s*\|""", re.VERBOSE)
+match = pattern.match(s)
+    
+name = match.group("name")
+n1 = float(match.group("n1"))
+'''
+s = "Button A: X+94, Y+34"
+pattern = re.compile(r"""Button A: X\+\s*(?P<x>.*?), Y\+\s*(?P<y>.*?)""", re.VERBOSE)
+match = pattern.match(s)
+x = match.group("x")
+y = match.group("y")
+print(s)
+print(x)
+print(y)
