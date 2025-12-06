@@ -62,7 +62,10 @@ for g in game_data:
 
             
 print(total)
+# part 1
 # 19231 too low
 # 24809 too low
 # 25705 too low
 
+# part 2
+# 108528956728655
