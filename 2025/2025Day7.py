@@ -24,10 +24,10 @@ f = open("2025\\2025Day7.txt", "r")
 gd = f.readlines()
 
 game_data = [i.strip('\n') for i in gd]
+
+# map the board
 y = 0
 map = {}
-
-# map
 for i in game_data:
    for j in range(0,len(i)):
       c = i[j]
@@ -55,10 +55,9 @@ for y in range(1,maxy):
    beams = newbeams             
 
 print(beams)
-print("Total with dict= " +str(num_of_splits))
+print("Total using a dictionary= " +str(num_of_splits))
 
 # part 1 - set
-'''
 beams = { (startx,1) }
 num_of_splits = 0
 for y in range(1,maxy):
@@ -72,8 +71,7 @@ for y in range(1,maxy):
          newbeams.add((b[0],y))
    beams = newbeams             
 
-print("Total with set= " +str(num_of_splits))
-'''
+print("Total using a set= " +str(num_of_splits))
 
 # part 2 - dictionary
 beams = { (startx,1): 1 }
@@ -85,21 +83,16 @@ for y in range(1,maxy):
          newbeams.update({(b[0]+1,y): newbeams.get((b[0]+1,y), 0)+v})                     
       else:
          newbeams.update({(b[0],y): newbeams.get((b[0],y), 0)+v})              
-   beams = newbeams.copy()
-   sub = 0
-   for i in beams.values():
-      sub += i
-   print("New beams " + str(newbeams) + " " + str(sub))        
-
+   beams = newbeams
               
 print(beams)
-sub = 0
+total = 0
 for i in beams.values():
-   sub += i
-print("Part 2 Total with dict= " + str(sub))
+   total += i
+print("Part 2 Total= " + str(total))
 
 '''
-# part 2
+# part 2 - takes too long building a list
 beams = [ (startx,1) ]
 num_of_splits = 0
 for y in range(1,maxy):
